@@ -1,9 +1,16 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:test_project/utils/route.dart';
 
-class LoginPage extends StatelessWidget {
+import '../utils/route.dart';
+
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool changeButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +23,17 @@ class LoginPage extends StatelessWidget {
               "assets/images/login.png",
               fit: BoxFit.cover,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Text(
+            const Text(
               "Welcome",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Padding(
@@ -34,27 +41,54 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Enter Username", labelText: "Username"),
                   ),
                   TextFormField(
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "Enter Password", labelText: "Password"),
                   )
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            ElevatedButton(
+            InkWell(
+              onTap: (){
+                setState((){
+                  changeButton = true;
+                });
+               // Navigator.pushNamed(context,MyRoute.homeRoute);
+              },
+              child:  AnimatedContainer(
+                duration: Duration(seconds: 1),
+                  width: changeButton ? 50 : 150,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: changeButton ? Icon(Icons.done,color: Colors.white,) : Text(
+                    "Login",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple,
+                       borderRadius: BorderRadius.circular(changeButton ? 50 : 8)
+                  ),
+                ) ,
+
+            )
+
+            /*ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context,MyRoute.homeRoute);
               },
               child: Text("Login"),
               style: TextButton.styleFrom(),
-            )
+            )*/
           ],
         ),
       ),
