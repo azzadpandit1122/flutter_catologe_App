@@ -56,30 +56,34 @@ class _LoginPageState extends State<LoginPage> {
               height: 20.0,
             ),
             InkWell(
-              onTap: (){
-                setState((){
+              onTap: () async {
+                setState(() {
                   changeButton = true;
                 });
-               // Navigator.pushNamed(context,MyRoute.homeRoute);
+                await Future.delayed(Duration(seconds: 1));
+                Navigator.pushNamed(context, MyRoute.homeRoute);
               },
-              child:  AnimatedContainer(
+              child: AnimatedContainer(
                 duration: Duration(seconds: 1),
-                  width: changeButton ? 50 : 150,
-                  height: 50,
-                  alignment: Alignment.center,
-                  child: changeButton ? Icon(Icons.done,color: Colors.white,) : Text(
-                    "Login",
-                    style: TextStyle(
+                width: changeButton ? 50 : 150,
+                height: 50,
+                alignment: Alignment.center,
+                child: changeButton
+                    ? Icon(
+                        Icons.done,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.deepPurple,
-                       borderRadius: BorderRadius.circular(changeButton ? 50 : 8)
-                  ),
-                ) ,
-
+                      )
+                    : Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      ),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(changeButton ? 50 : 8)),
+              ),
             )
 
             /*ElevatedButton(
